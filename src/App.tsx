@@ -1,30 +1,37 @@
+import { useState } from 'react'
 import './App.css'
-import { FlyingBox } from './components/FlyingBox'
+import { ContactCenter } from './components/ContactCenter'
 import { NovaPoshtaLogo } from './components/NovaPoshtaLogo'
-import { SearchBar } from './components/SearchBar'
+import { useStatuses } from './hooks/useStatuses'
+import { AdminPage } from './pages/AdminPage'
+import { MainPage } from './pages/MainPage'
 
 function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'admin'>('home')
+  const [isFound, setIsFound] = useState<boolean>(false)
+  const { statuses } = useStatuses()
+
+  if (currentPage === 'admin') {
+    return (
+      <div>
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="absolute top-4 left-4 rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
+        >
+          ← Back to Home
+        </button>
+        <AdminPage statuses={statuses} />
+      </div>
+    )
+  }
+
   return (
     <>
-      <div className="absolute h-screen w-screen overflow-hidden">
-        <FlyingBox initialX={window.innerWidth / 2} initialY={window.innerHeight / 2} speed={2.5} />
-        <FlyingBox initialX={window.innerWidth / 3} initialY={window.innerHeight / 3} speed={2.5} />
-        <FlyingBox initialX={window.innerWidth / 4} initialY={window.innerHeight / 4} speed={2.5} />
-        <FlyingBox initialX={window.innerWidth / 5} initialY={window.innerHeight / 5} speed={2.5} />
-        <FlyingBox initialX={window.innerWidth / 8} initialY={window.innerHeight / 5} speed={2.5} />
-      </div>
-      <header className="relative z-10 mb-8 flex h-16 w-full flex-row items-center justify-between">
-        <NovaPoshtaLogo />
-        <div className="flex h-12 w-48 flex-col text-right">
-          <h2>
-            <b>+38-097-537-08-84</b>
-          </h2>
-          <h3>Контакт-центр</h3>
-        </div>
+      <header className="relative mb-8 flex h-16 w-full flex-row items-center justify-between">
+        <NovaPoshtaLogo onClick={() => setCurrentPage('admin')} />
+        <ContactCenter />
       </header>
-      <main className="relative z-10 flex items-center justify-center">
-        <SearchBar />
-      </main>
+      <MainPage isFound={isFound} setIsFound={setIsFound} statuses={statuses} />
     </>
   )
 }
