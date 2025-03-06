@@ -11,8 +11,8 @@ export const StatusList = ({ statuses }: StatusListProps) => {
         .slice()
         .reverse()
         .map((status) => (
-          <div key={status.id} className="w-md rounded-lg bg-white p-4 shadow-md">
-            <div className="flex justify-between">
+          <div key={status.id} className="max-w-md rounded-lg bg-white p-4 shadow-md">
+            <div className="flex justify-between gap-4">
               <span className="font-bold text-[#da292b]">{status.status}</span>
               <span className="text-sm text-gray-500">
                 {status.created_at && new Date(status.created_at).toLocaleString()}

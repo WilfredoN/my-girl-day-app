@@ -9,6 +9,7 @@ interface SearchBarProps {
 export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
   const [isCorrect, setIsCorrect] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
     const storedSearchState = localStorage.getItem('hasSearched')
@@ -41,13 +42,15 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
     <div className="flex w-full flex-col items-center justify-center gap-12">
       {!isFound && (
         <input
-          className={`h-12 w-4/12 rounded-full bg-white px-4 outline-2 transition-all duration-100 focus:border-0 focus:ring-2 ${
+          className={`h-12 w-fit min-w-4/12 rounded-full bg-white px-4 outline-2 transition-all duration-100 focus:border-0 focus:ring-2 ${
             isCorrect
               ? 'outline-[#35c235] focus:ring-[#35c235]'
               : 'outline-[#da292c95] focus:ring-[#da292b]'
           }`}
-          placeholder="Отследите вашу посылку..."
+          placeholder={isFocused ? 'Кокой же номер.. тык тык...' : 'Отследите вашу посылку...'}
           onChange={handleSearch}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
       )}
       {isCorrect && (

@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      <header className="relative mb-8 flex h-16 w-full flex-row items-center justify-between">
+      <header className="relative z-10 mb-8 flex min-h-16 w-full flex-wrap items-center justify-between p-0 md:flex-row md:p-4">
         <NovaPoshtaLogo onClick={() => setCurrentPage('admin')} />
         <ContactCenter />
       </header>

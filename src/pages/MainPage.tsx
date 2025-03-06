@@ -12,7 +12,7 @@ interface MainPageProps {
 export const MainPage = ({ isFound, setIsFound, statuses }: MainPageProps) => {
   return (
     <>
-      <div className="absolute inset-0 -z-10 h-screen w-screen overflow-hidden">
+      <div className="absolute inset-0 -z-[-1] h-screen w-screen overflow-hidden">
         {!isFound && (
           <>
             <FlyingBox
@@ -40,10 +40,15 @@ export const MainPage = ({ isFound, setIsFound, statuses }: MainPageProps) => {
               initialY={window.innerHeight / 5}
               speed={2.5}
             />
+            <FlyingBox
+              initialX={window.innerWidth / 8}
+              initialY={window.innerHeight / 5}
+              speed={2.5}
+            />
           </>
         )}
       </div>
-      <main className="relative flex flex-col items-center justify-center">
+      <main className="relative z-10 flex flex-col items-center justify-center">
         <SearchBar isFound={isFound} setIsFound={setIsFound} />
         {isFound && <StatusList statuses={statuses} />}
       </main>
