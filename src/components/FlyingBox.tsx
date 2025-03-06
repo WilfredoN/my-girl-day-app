@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import npBox from '../assets/np_box.png'
 
 interface FlyingBoxProps {
@@ -11,7 +11,7 @@ interface FlyingBoxProps {
 let currentDigitIndex = 0
 const trackingNumber = '080806'
 
-export const FlyingBox = ({ initialX, initialY, speed = 1 }: FlyingBoxProps) => {
+export const FlyingBox = memo(({ initialX, initialY, speed = 1 }: FlyingBoxProps) => {
   const controls = useAnimationControls()
   const [emittedDigit, setEmittedDigit] = useState<string | null>(null)
   const [emitAnimation, setEmitAnimation] = useState(false)
@@ -141,4 +141,4 @@ export const FlyingBox = ({ initialX, initialY, speed = 1 }: FlyingBoxProps) => 
       )}
     </div>
   )
-}
+})
