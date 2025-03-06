@@ -12,10 +12,18 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
   const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
-    const storedSearchState = localStorage.getItem('hasSearched')
-    if (storedSearchState === 'true') {
-      setHasSearched(true)
-      setIsFound(true)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'c' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        localStorage.removeItem('hasSearched')
+        setHasSearched(false)
+        setIsFound(false)
+        console.log('Search state cleared')
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [setIsFound])
 
