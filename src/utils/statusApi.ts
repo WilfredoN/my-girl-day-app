@@ -1,5 +1,5 @@
-import supabase from '../components/supabaseClient'
 import { TablesInsert } from '../types/supabase'
+import supabase from './supabaseClient'
 
 export const addStatus = async (statusName: string) => {
   const newStatus: TablesInsert<'flower-status'> = {

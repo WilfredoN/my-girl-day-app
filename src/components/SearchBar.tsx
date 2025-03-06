@@ -49,12 +49,14 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       {!isFound && (
-        <input
+        <motion.input
           className={`h-12 w-fit min-w-4/12 rounded-full bg-white px-4 outline-2 transition-all duration-100 focus:border-0 focus:ring-2 ${
             isCorrect
               ? 'outline-[#35c235] focus:ring-[#35c235]'
               : 'outline-[#da292c95] focus:ring-[#da292b]'
           }`}
+          drag
+          whileHover={{ scale: 1.05 }}
           placeholder={isFocused ? 'Кокой же номер.. тык тык...' : 'Отследите вашу посылку...'}
           onChange={handleSearch}
           onFocus={() => setIsFocused(true)}
@@ -71,7 +73,7 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
           dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
           dragElastic={0.5}
           whileHover={{
-            scale: 1.5,
+            scale: 1.2,
             rotate: 24,
             backgroundColor: '#35c235',
             color: '#ffffff',
