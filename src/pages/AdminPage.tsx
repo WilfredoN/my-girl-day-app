@@ -3,6 +3,7 @@ import { Tables } from '../types/supabase'
 import { addStatus, clearStatuses } from '../utils/statusApi'
 
 const statusList = [
+  { id: 0, name: 'Курьер ожидает у ворот' },
   { id: 1, name: 'Заказ принят' },
   { id: 2, name: 'Букет готов' },
   { id: 3, name: 'Курьер в пути' },
@@ -15,12 +16,16 @@ export const AdminPage = ({ statuses }: AdminPageProps) => {
     <div className="my-6 flex flex-col items-center justify-center gap-8 sm:px-0 md:p-4">
       <div className="mb-8 h-fit rounded-lg bg-white shadow-md sm:p-0 md:p-4">
         <h2 className="mb-4 text-xl font-bold">Update Status</h2>
-        <div className="flex flex-col flex-wrap gap-4">
+        <div className="flex h-full flex-col flex-wrap gap-4">
           {statusList.map((status) => (
             <button
               key={status.id}
               onClick={() => addStatus(status.name)}
-              className="rounded bg-[#da292b] px-4 py-2 text-center font-bold text-white hover:bg-[#b52023]"
+              className={`rounded px-4 py-2 text-center font-bold text-white ${
+                status.id === 0
+                  ? 'bg-[#35c235] hover:bg-[#3e7e3e]'
+                  : 'bg-[#da292b] hover:bg-[#b52023]'
+              }`}
             >
               {status.name}
             </button>

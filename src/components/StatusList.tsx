@@ -4,6 +4,8 @@ interface StatusListProps {
   statuses: Tables<'flower-status'>[]
 }
 
+const awaitingCourierStatus = 'Курьер ожидает у ворот'
+
 export const StatusList = ({ statuses }: StatusListProps) => {
   return (
     <div className="my-4 flex flex-col items-center gap-6">
@@ -13,7 +15,11 @@ export const StatusList = ({ statuses }: StatusListProps) => {
         .map((status) => (
           <div key={status.id} className="max-w-md rounded-lg bg-white p-4 shadow-md">
             <div className="flex justify-between gap-4">
-              <span className="font-bold text-[#da292b]">{status.status}</span>
+              <span
+                className={`font-bold ${status.status === awaitingCourierStatus ? 'text-[#35c235]' : 'text-[#da292b]'}`}
+              >
+                {status.status}
+              </span>
               <span className="text-sm text-gray-500">
                 {status.created_at && new Date(status.created_at).toLocaleString()}
               </span>
