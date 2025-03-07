@@ -69,7 +69,6 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
               ? 'outline-[#35c235] focus:ring-[#35c235]'
               : 'outline-[#da292c95] focus:ring-[#da292b]'
           }`}
-          drag
           whileHover={{ scale: 1.05 }}
           placeholder={isFocused ? 'Кокой же номер.. тык тык...' : 'Отследите вашу посылку...'}
           onChange={handleSearch}

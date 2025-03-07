@@ -54,7 +54,7 @@ export const StatusList = ({ statuses }: StatusListProps) => {
   }, [statuses])
 
   return (
-    <div className="my-4 flex w-full max-w-10/12 flex-col items-center gap-6">
+    <div className="my-4 flex w-full flex-col items-center gap-6 md:max-w-10/12 xl:max-w-3/12">
       {showConfetti && (
         <Confetti
           width={confettiConfig.width}
