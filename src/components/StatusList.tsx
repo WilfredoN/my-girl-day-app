@@ -54,7 +54,7 @@ export const StatusList = ({ statuses }: StatusListProps) => {
   }, [statuses])
 
   return (
-    <div className="my-4 flex flex-col items-center gap-6">
+    <div className="my-4 flex w-full max-w-10/12 flex-col items-center gap-6">
       {showConfetti && (
         <Confetti
           width={confettiConfig.width}
@@ -83,7 +83,7 @@ export const StatusList = ({ statuses }: StatusListProps) => {
         .map((status) => (
           <div
             key={status.id}
-            className="max-w-md rounded-lg bg-white p-4 shadow-md"
+            className="w-full rounded-lg bg-white p-4 shadow-md"
             ref={status.status === awaitingCourierStatus ? courierMessageRef : null}
           >
             <div className="flex justify-between gap-4">

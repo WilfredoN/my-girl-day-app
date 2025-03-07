@@ -1,15 +1,18 @@
+import { useEffect, useState } from 'react'
 import { FlyingBox } from '../components/FlyingBox'
 import { SearchBar } from '../components/SearchBar'
 import { StatusList } from '../components/StatusList'
 import { Tables } from '../types/supabase'
 
 interface MainPageProps {
-  isFound: boolean
-  setIsFound: (isFound: boolean) => void
   statuses: Tables<'flower-status'>[]
 }
 
-export const MainPage = ({ isFound, setIsFound, statuses }: MainPageProps) => {
+export const MainPage = ({ statuses }: MainPageProps) => {
+  const [isFound, setIsFound] = useState<boolean>(false)
+  useEffect(() => {
+    console.log(isFound)
+  }, [isFound])
   return (
     <>
       <div className="absolute inset-0 -z-[-1] h-screen w-screen overflow-hidden">

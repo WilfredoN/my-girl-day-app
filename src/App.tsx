@@ -8,7 +8,6 @@ import { MainPage } from './pages/MainPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'admin'>('home')
-  const [isFound, setIsFound] = useState<boolean>(false)
   const { statuses } = useStatuses()
 
   if (currentPage === 'admin') {
@@ -31,7 +30,7 @@ function App() {
         <NovaPoshtaLogo onClick={() => setCurrentPage('admin')} />
         <ContactCenter />
       </header>
-      <MainPage isFound={isFound} setIsFound={setIsFound} statuses={statuses} />
+      <MainPage statuses={statuses} />
     </>
   )
 }

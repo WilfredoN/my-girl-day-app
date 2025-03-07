@@ -1,5 +1,10 @@
 import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
+import {
+  clearSearchState,
+  hasSearchCompleted,
+  setSearchCompleted,
+} from '../types/localStorageAdapter'
 
 interface SearchBarProps {
   isFound: boolean
@@ -12,9 +17,18 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
   const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
+    const searchCompleted = hasSearchCompleted()
+    setHasSearched(searchCompleted)
+
+    if (searchCompleted && !isFound) {
+      setIsFound(true)
+    }
+  }, [setIsFound, isFound])
+
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'c' && !event.ctrlKey && !event.metaKey && !event.altKey) {
-        localStorage.removeItem('hasSearched')
+        clearSearchState()
         setHasSearched(false)
         setIsFound(false)
         console.log('Search state cleared')
@@ -39,7 +53,7 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
     setIsFound(true)
     setIsCorrect(false)
     setHasSearched(true)
-    localStorage.setItem('hasSearched', 'true')
+    setSearchCompleted(true)
   }
 
   if (hasSearched) {
