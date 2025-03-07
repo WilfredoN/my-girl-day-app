@@ -98,7 +98,7 @@ export const StatusList = ({ statuses }: StatusListProps) => {
             </div>
           </div>
         ))}
-      {statuses.length === 0 && <p className="text-gray-500">No status updates yet</p>}
+      {statuses.length === 0 && <p className="text-gray-500">Оновлень нема...</p>}
     </div>
   )
 }

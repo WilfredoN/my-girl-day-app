@@ -1,60 +1,23 @@
 import { motion } from 'motion/react'
-import { useEffect, useState } from 'react'
-import {
-  clearSearchState,
-  hasSearchCompleted,
-  setSearchCompleted,
-} from '../types/localStorageAdapter'
+import { useState } from 'react'
+import { useSearchState } from '../hooks/useSearchState'
+import { useTrackingValidation } from '../hooks/useTrackingValidation'
+import { interpolateColor } from '../utils/interpolateColor'
 
 interface SearchBarProps {
   isFound: boolean
   setIsFound: (isFound: boolean) => void
 }
 
+const ERROR_COLOR = '#da292b'
+const SUCCESS_COLOR = '#35c235'
+
 export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [hasSearched, setHasSearched] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const { inputValue, isCorrect, matchProgress, handleInputChange } = useTrackingValidation()
+  const { hasSearched, completeSearch } = useSearchState(isFound, setIsFound)
 
-  useEffect(() => {
-    const searchCompleted = hasSearchCompleted()
-    setHasSearched(searchCompleted)
-
-    if (searchCompleted && !isFound) {
-      setIsFound(true)
-    }
-  }, [setIsFound, isFound])
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'c' && !event.ctrlKey && !event.metaKey && !event.altKey) {
-        clearSearchState()
-        setHasSearched(false)
-        setIsFound(false)
-        console.log('Search state cleared')
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [setIsFound])
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === '080806') {
-      setIsCorrect(true)
-    } else {
-      setIsCorrect(false)
-    }
-  }
-
-  const handleFindPackage = () => {
-    setIsFound(true)
-    setIsCorrect(false)
-    setHasSearched(true)
-    setSearchCompleted(true)
-  }
+  const currentColor = interpolateColor(ERROR_COLOR, SUCCESS_COLOR, matchProgress)
 
   if (hasSearched) {
     return null
@@ -64,14 +27,17 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
     <div className="flex w-full flex-col items-center justify-center gap-12">
       {!isFound && (
         <motion.input
-          className={`h-12 w-fit min-w-4/12 rounded-full bg-white px-4 outline-2 transition-all duration-100 focus:border-0 focus:ring-2 ${
-            isCorrect
-              ? 'outline-[#35c235] focus:ring-[#35c235]'
-              : 'outline-[#da292c95] focus:ring-[#da292b]'
-          }`}
+          value={inputValue}
+          className={`h-12 w-fit min-w-4/12 rounded-full bg-white px-4 outline-2 transition-all duration-100 focus:border-0 focus:ring-2`}
+          style={
+            {
+              outlineColor: currentColor,
+              '--tw-ring-color': currentColor,
+            } as React.CSSProperties
+          }
           whileHover={{ scale: 1.05 }}
           placeholder={isFocused ? 'Кокой же номер.. тык тык...' : 'Отследите вашу посылку...'}
-          onChange={handleSearch}
+          onChange={handleInputChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
@@ -95,7 +61,7 @@ export const SearchBar = ({ isFound, setIsFound }: SearchBarProps) => {
             scale: 1.0,
             rotate: -36,
           }}
-          onClick={handleFindPackage}
+          onClick={completeSearch}
         >
           <button className="cursor-pointer">Найти посылку</button>
         </motion.div>
