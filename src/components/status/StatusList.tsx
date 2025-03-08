@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Tables } from '../types/supabase'
-import { ConfettiEffect } from './ConfettiEffect'
-import { EmptyState } from './EmptyState'
-import { Timeline } from './Timeline'
+import { Tables } from '../../types/supabase'
+import { ConfettiEffect } from '../ConfettiEffect'
+import { EmptyState } from '../EmptyState'
+import { Timeline } from './timeline/Timeline'
 
 interface StatusListProps {
   statuses: Tables<'flower-status'>[]

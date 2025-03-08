@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
-import { Tables } from '../types/supabase'
-import { Status } from './Status'
+import { Tables } from '../../../types/supabase'
+import { Status } from '../Status'
 
 interface TimelineItemProps {
   status: Tables<'flower-status'>

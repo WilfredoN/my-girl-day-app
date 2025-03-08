@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Tables } from '../types/supabase'
+import { Tables } from '../../types/supabase'
 import { StatusIndicator } from './StatusIndicator'
 
 interface StatusProps {

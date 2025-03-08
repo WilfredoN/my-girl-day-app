@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react'
-import { Tables } from '../types/supabase'
+import { Tables } from '../../../types/supabase'
 import { TimelineItem } from './TimelineItem'
 
 interface TimelineProps {

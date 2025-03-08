@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FlyingBox } from '../components/FlyingBox'
 import { SearchBar } from '../components/SearchBar'
-import { StatusList } from '../components/StatusList'
+import { StatusList } from '../components/status/StatusList'
 import { Tables } from '../types/supabase'
 
 interface MainPageProps {
