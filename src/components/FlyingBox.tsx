@@ -115,7 +115,7 @@ export const FlyingBox = memo(({ initialX, initialY, speed = 1 }: FlyingBoxProps
         alt="Nova Poshta Box"
         animate={controls}
         draggable={false}
-        className="h-16 w-16 cursor-pointer"
+        className="h-24 w-24 cursor-pointer"
         onClick={handleClick}
         drag
         whileHover={{ scale: 1.1 }}
