@@ -8,10 +8,10 @@ import { Tables } from '../types/supabase'
 import { clearStatuses, sendStatus } from '../utils/statusApi'
 
 const statusList = [
-  { id: 0, name: 'Курьер ожидает у ворот' },
-  { id: 3, name: 'Заказ принят' },
+  { id: 1, name: 'Заказ принят' },
   { id: 2, name: 'Букет готов' },
-  { id: 1, name: 'Курьер в пути' },
+  { id: 3, name: 'Курьер в пути' },
+  { id: 4, name: 'Курьер ожидает у ворот' },
 ]
 
 interface AdminPageProps {

@@ -8,6 +8,7 @@ import { MainPage } from './pages/MainPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'admin'>('home')
+  const [counter, setCounter] = useState(0)
   const { statuses } = useStatuses()
 
   if (currentPage === 'admin') {
@@ -27,7 +28,15 @@ function App() {
   return (
     <>
       <header className="relative z-10 mb-8 flex min-h-16 w-full flex-wrap items-center justify-between p-0 md:flex-row md:p-4">
-        <NovaPoshtaLogo onClick={() => setCurrentPage('admin')} />
+        <NovaPoshtaLogo
+          onClick={() => {
+            setCounter(counter + 1)
+            if (counter >= 5) {
+              setCurrentPage('admin')
+              setCounter(0)
+            }
+          }}
+        />
         <ContactCenter />
       </header>
       <MainPage statuses={statuses} />
