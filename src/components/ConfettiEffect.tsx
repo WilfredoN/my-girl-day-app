@@ -20,8 +20,10 @@ export const ConfettiEffect = ({
     <Confetti
       width={confettiConfig.width}
       height={confettiConfig.height}
-      numberOfPieces={200}
+      numberOfPieces={50}
       recycle={true}
+      gravity={0.01}
+      tweenDuration={1000}
       confettiSource={{
         x: confettiConfig.x,
         y: confettiConfig.y + 25,

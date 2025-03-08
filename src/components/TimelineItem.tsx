@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { Tables } from '../types/supabase'
 import { Status } from './Status'
 
@@ -6,6 +7,7 @@ interface TimelineItemProps {
   index: number
   newestSpecialStatus: Tables<'flower-status'> | undefined
   specialStatusRef: React.RefObject<HTMLDivElement | null>
+  isNewest?: boolean
 }
 
 export const TimelineItem = ({
@@ -13,9 +15,18 @@ export const TimelineItem = ({
   index,
   newestSpecialStatus,
   specialStatusRef,
+  isNewest = false,
 }: TimelineItemProps) => {
   return (
-    <div className="relative flex w-full items-center">
+    <motion.div
+      className="relative flex w-full items-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.1,
+      }}
+    >
       {index % 2 === 0 ? (
         <>
           <div className="flex w-1/2 justify-end pr-6">
@@ -23,6 +34,7 @@ export const TimelineItem = ({
               status={status}
               position="left"
               ref={status.id === newestSpecialStatus?.id ? specialStatusRef : null}
+              isNewest={isNewest}
             />
           </div>
           <TimelineDot />
@@ -37,11 +49,12 @@ export const TimelineItem = ({
               status={status}
               position="right"
               ref={status.id === newestSpecialStatus?.id ? specialStatusRef : null}
+              isNewest={isNewest}
             />
           </div>
         </>
       )}
-    </div>
+    </motion.div>
   )
 }
 
